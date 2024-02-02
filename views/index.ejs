@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>DRAGY</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+    <%- include('./partials/RaceTrack.ejs') %>
+        <% 
+        let allCars = []
+cars.forEach((car) => {
+    let CAR = {
+        id:car.id,
+        brand:`${car.brand}`,
+        model:`${car.model}`,
+        power:`${car.power}`,
+        drive:`${car.drive}`,
+        weight:`${car.weight}`,
+        registration:`${car.registration}`
+    }
+    allCars.push(CAR)
+});
+        %>
+        
+<ul class="ul">
+    
+    <% 
+        allCars.forEach((car)=>{
+            %> <li class="li">  
+              <b>  <%= car.brand %> <%= car.model %>, </b>Snaga: <%= car.power %>, Pogon: <%= car.drive %>, Težina <%= car.weight %>, Registracija: <%= car.registration %> 
+              <button id="<%=car.id%>" class="c">RACE</button>
+              <button id ="<%=car.id%>" class="UpBtn" onclick='openModal(this.id)'>UREDI</button>
+              <button id="<%=car.id%>" class="DelBtn">OBRIŠI</button>
+              </li><%
+        })
+        %>
+    </ul>
+
+
+    <div class="popup-modal">
+    	<button class="button" id="closeModal" onclick="closeModal()">X</button>
+
+    	<div class="UpContainer">
+        <form id="carFormUp" action="" method="POST">
+            <label for="brand">Marka:</label>
+            <input type="text" id="brand" name="brand" required>
+
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required>
+
+            <label for="power">Snaga:</label>
+            <input type="text" id="power" name="power" required>
+
+            <label for="drive">Pogon:</label>
+            <select id="drive" name="drive" required>
+            <option value="FWD" selected>FWD</option>
+            <option value="RWD">RWD</option>
+            <option value="AWD">AWD</option>
+            </select>
+
+            <label for="engine">Motor:</label>
+            <input type="text" id="engine" name="engine" required>
+
+            <label for="weight">Kilaza:</label>
+            <input type="text" id="weight" name="weight" required>
+
+            <label for="registration">Registracija:</label>
+            <input type="text" id="registration" name="registration" required>
+
+            <button class="UpCar" onclick="SendCarData()" type="submit">Uredi auto</button>
+        </form>
+    </div>
+    </div>
+ 
+    <div class="overlay"></div>
+
+    <script src="OOPcar.js"></script>   
+</body>
+</html>
+

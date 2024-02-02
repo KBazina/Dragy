@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <%- include('./partials/header.ejs') %>
+    
+    <div class="container">
+        <h1>Unos informacija o automobilu</h1>
+        <form id="carForm" action="addCar" method="POST">
+            <label for="brand">Marka:</label>
+            <input type="text" id="brand" name="brand" required>
+
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required>
+
+            <label for="power">Snaga:</label>
+            <input type="text" id="power" name="power" required>
+
+            <label for="drive">Pogon:</label>
+            <select id="drive" name="drive" required>
+                <option value="FWD" selected>FWD</option>
+                <option value="RWD">RWD</option>
+                <option value="AWD">AWD</option>
+              </select>
+
+            <label for="engine">Motor:</label>
+            <input type="text" id="engine" name="engine" required>
+
+            <label for="weight">Kilaza:</label>
+            <input type="text" id="weight" name="weight" required>
+
+            <label for="registration">Registracija:</label>
+            <input type="text" id="registration" name="registration" required>
+
+            <button id="AddBtn" type="submit">Dodaj auto</button>
+        </form>
+    </div>
+<script src="OOPcar.js"></script>
+</body>
+</html>
