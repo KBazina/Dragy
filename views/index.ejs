@@ -31,7 +31,7 @@ cars.forEach((car) => {
         allCars.forEach((car)=>{
             %> <li class="li">  
               <b>  <%= car.brand %> <%= car.model %>, </b>Snaga: <%= car.power %>, Pogon: <%= car.drive %>, Težina <%= car.weight %>, Registracija: <%= car.registration %> 
-              <button id="<%=car.id%>" class="c">RACE</button>
+              <button id="<%=car.id%>" class="RaceBtn">RACE</button>
               <button id ="<%=car.id%>" class="UpBtn" onclick='openModal(this.id)'>UREDI</button>
               <button id="<%=car.id%>" class="DelBtn">OBRIŠI</button>
               </li><%
@@ -80,4 +80,3 @@ cars.forEach((car) => {
     <script src="OOPcar.js"></script>   
 </body>
 </html>
-
