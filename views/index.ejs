@@ -9,6 +9,14 @@
 <body>
     <%- include('./partials/header.ejs') %>
     <%- include('./partials/RaceTrack.ejs') %>
+<div>
+    Poredaj aute po:  <select id="sortOption" name="">
+        <option value="Najstariji">Najstariji</option>
+        <option value="Snaga">Snaga</option>
+        <option value="Pogon">Pogon</option>
+     </select>
+</div>
+
         <% 
         let allCars = []
 cars.forEach((car) => {
@@ -24,6 +32,8 @@ cars.forEach((car) => {
     allCars.push(CAR)
 });
         %>
+
+
         
 <ul class="ul">
     
@@ -31,9 +41,9 @@ cars.forEach((car) => {
         allCars.forEach((car)=>{
             %> <li class="li">  
               <b>  <%= car.brand %> <%= car.model %>, </b>Snaga: <%= car.power %>, Pogon: <%= car.drive %>, Težina <%= car.weight %>, Registracija: <%= car.registration %> 
-              <button id="<%=car.id%>" class="RaceBtn">RACE</button>
+              <button id="<%=car.id%>" class="RaceBtn" onclick='RaceCarFun(this.id)'>RACE</button>
               <button id ="<%=car.id%>" class="UpBtn" onclick='openModal(this.id)'>UREDI</button>
-              <button id="<%=car.id%>" class="DelBtn">OBRIŠI</button>
+              <button id="<%=car.id%>" class="DelBtn" onclick='DelFun(this.id)'>OBRIŠI</button>
               </li><%
         })
         %>

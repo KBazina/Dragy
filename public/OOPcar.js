@@ -20,13 +20,56 @@ fetch('/getCars')
     })
     .catch(error => console.error('Greška pri dohvaćanju podataka:', error));
 
+    document.getElementById('sortOption').addEventListener('change', function () {
+        sortCars();
+    });
+     
+    function sortCars(){
+        document.querySelector("h2").style.textDecoration="none"
+        var sortBy = document.getElementById('sortOption').value;
+
+        const Ul=document.querySelector(".ul")
+
+        let djeca = Ul.children
+        Array.from(djeca).forEach(li => {
+           li.remove();
+        });
+        allCars.sort(function (a, b) {
+            if (sortBy === 'Snaga') {
+                return a.power - b.power;
+            } else if (sortBy === 'Pogon') {
+                return a.drive.localeCompare(b.drive);
+            } else if (sortBy === 'Najstariji') {
+                return a.id - b.id;
+            }
+        });
+
+        allCars.forEach(car=>{
+            let li = document.createElement("li")
+            li.innerHTML=`<li class="li">  
+            <b>  ${car.brand} ${car.model}, </b>Snaga: ${car.power}, Pogon: ${car.drive}, Težina ${car.weight}, Registracija: ${car.registration} 
+            <button id="${car.id}" class="RaceBtn" onclick='RaceCarFun(this.id)'>RACE</button>
+            <button id ="${car.id}" class="UpBtn" onclick='openModal(this.id)'>UREDI</button>
+            <button id="${car.id}" class="DelBtn" onclick='DelFun(this.id)'>OBRIŠI</button>
+            </li>`
+            Ul.append(li)
+        })
+        RaceArray = []
+        document.querySelector("h2").innerHTML=`RACE
+        <span class="circle circle1"></span>
+        <span class="circle circle2"></span>
+        <span class="circle circle3"></span>`
+        let kids = document.querySelector('.RaceUl').children
+        Array.from(kids).forEach(li => {
+            li.remove();
+        });
+    };
+
+
 
 //ZA BRISANJE AUTA
-let Btns = document.querySelectorAll(".DelBtn")
 
-Btns.forEach((btn)=>{
-    btn.addEventListener("click",()=>{
-        let id = btn.getAttribute("id")
+function DelFun(id){
         fetch(`/deleteCar/${parseInt(id)}`,{method:"DELETE"},
         )
         .then((response) => response.json())
@@ -37,19 +80,21 @@ Btns.forEach((btn)=>{
         .catch((error)=>{
             console.error("Greška prilikom brisanja automobia",error)
         })
-    })
-})
+    }
+
 // ZA TRKANJE
 let intervalId;
-let RaceBtns = document.querySelectorAll(".RaceBtn")
 let RaceArray = []
-RaceBtns.forEach(btn=>{
-    btn.addEventListener("click",()=>{
-        btn.style.backgroundColor = "darkgreen";
+function RaceCarFun(id){
+    let btns = (document.querySelectorAll(`.RaceBtn`))
+    for(const btn of btns){
+        if(btn.getAttribute("id")===id)
+    
+     {   btn.style.backgroundColor = "darkgreen";
         btn.innerText="RACING"
         btn.style.cursor = 'not-allowed';
-        btn.disabled = true;
-        let TargetCar = (allCars.find(CAR => CAR.id === parseInt(btn.getAttribute("id"))))
+        btn.disabled = true;}}
+        let TargetCar = (allCars.find(CAR => CAR.id === parseInt(id)))
         RaceArray.push(TargetCar);
     let brojac=1
     let circle2=document.querySelector('.circle2')
@@ -105,11 +150,12 @@ RaceBtns.forEach(btn=>{
                     document.querySelectorAll(".circle").forEach(circle=>{  
                         circle.style.display="none"
                     })
+                    document.querySelector("h2").style.textDecoration="none"
                 }
             })
         })
-    })
-})
+    }
+
 
 
 document.querySelector("h2").addEventListener("click",() =>{
