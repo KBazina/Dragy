@@ -36,7 +36,7 @@ fetch('/getCars')
         });
         allCars.sort(function (a, b) {
             if (sortBy === 'Snaga') {
-                return a.power - b.power;
+                return b.power - a.power;
             } else if (sortBy === 'Pogon') {
                 return a.drive.localeCompare(b.drive);
             } else if (sortBy === 'Najstariji') {
@@ -46,12 +46,13 @@ fetch('/getCars')
 
         allCars.forEach(car=>{
             let li = document.createElement("li")
-            li.innerHTML=`<li class="li">  
+            li.setAttribute("class","li")
+            li.innerHTML=` 
             <b>  ${car.brand} ${car.model}, </b>Snaga: ${car.power}, Pogon: ${car.drive}, Težina ${car.weight}, Registracija: ${car.registration} 
             <button id="${car.id}" class="RaceBtn" onclick='RaceCarFun(this.id)'>RACE</button>
             <button id ="${car.id}" class="UpBtn" onclick='openModal(this.id)'>UREDI</button>
             <button id="${car.id}" class="DelBtn" onclick='DelFun(this.id)'>OBRIŠI</button>
-            </li>`
+            `
             Ul.append(li)
         })
         RaceArray = []
@@ -64,8 +65,6 @@ fetch('/getCars')
             li.remove();
         });
     };
-
-
 
 //ZA BRISANJE AUTA
 
@@ -259,4 +258,5 @@ const openModal = (id) =>{
         console.error(error)
     })
 }
- 
+ // UNIQUE REGISTRATION
+

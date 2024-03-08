@@ -51,11 +51,17 @@ app.post("/addCar",(req,res)=>{
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
   db.run(query,[brand, model, power, drive, engine, weight, registration],(err)=>{
-    if(err) console.error(err.message);
-    console.log("Auto dodan u bazu")
-    res.redirect('/');
-  })
+    if(err) {
+      console.error(err.message);
+      res.send(`<script>   window.alert("Promijenite registraciju!");
+       window.location.href="/addCar";</script>`);
+    }
 
+    else{
+      console.log("Auto dodan u bazu")
+      res.redirect('/');
+    }
+  })
 })
 
 app.delete("/deleteCar/:id",(req,res)=>{
