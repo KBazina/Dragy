@@ -45,10 +45,10 @@ app.get("/addCar",(req,res)=>{
 })
 
 app.post("/addCar",(req,res)=>{
-  const { brand, model, power, drive, engine, weight,  registration } = req.body;
-  let registration2 = registration.trim()
+  let { brand, model, power, drive, engine, weight,  registration } = req.body;
+  registration = registration.trim()
   const query = `
-      INSERT INTO cars (brand, model, power, drive, engine, weight, registration2)
+      INSERT INTO cars (brand, model, power, drive, engine, weight, registration)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
   db.run(query,[brand, model, power, drive, engine, weight, registration],(err)=>{

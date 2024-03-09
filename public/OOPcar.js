@@ -167,7 +167,7 @@ document.querySelector("h2").addEventListener("click",() =>{
     document.querySelectorAll(".RaceDel").forEach(btn=>{
         btn.remove()
     })
-   
+
     if(document.querySelector("h2").innerText==="STOP RACING"){
         document.querySelector("h2").innerHTML=`RACE
         <span class="circle circle1"></span>
